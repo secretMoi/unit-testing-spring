@@ -28,6 +28,7 @@ public class BusinessImpl {
             sum += value;
         }
 
+//        someDataService.storeSum(sum);
         return sum;
     }
 }

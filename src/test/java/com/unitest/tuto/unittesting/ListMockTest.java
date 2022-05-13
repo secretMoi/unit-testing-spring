@@ -7,12 +7,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ListMockTest {
 
-    List mock = mock(List.class);
+    List<String> mock = mock(List.class);
 
     @Test
     void size_basic() {
@@ -43,5 +49,20 @@ class ListMockTest {
 
         assertEquals("hey", mock.get(0));
         assertEquals("hey", mock.get(1));
+    }
+
+    @Test
+    void verificationBasics() {
+
+        String value1 = mock.get(0);
+        String value2 = mock.get(1);
+
+        // verify, vérifie une valeur qui n'est pas retournée
+        verify(mock).get(0);
+        verify(mock, times(2)).get(anyInt());
+        verify(mock, atLeast(1)).get(anyInt());
+        verify(mock, atLeastOnce()).get(anyInt());
+        verify(mock, atMost(2)).get(anyInt());
+        verify(mock, never()).get(2);
     }
 }
