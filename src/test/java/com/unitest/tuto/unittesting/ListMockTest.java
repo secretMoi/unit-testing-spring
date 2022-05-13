@@ -1,6 +1,7 @@
 package com.unitest.tuto.unittesting;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
@@ -58,11 +59,23 @@ class ListMockTest {
         String value2 = mock.get(1);
 
         // verify, vérifie une valeur qui n'est pas retournée
+        // verify().get() vérifie la méthode get() du mock
         verify(mock).get(0);
         verify(mock, times(2)).get(anyInt());
         verify(mock, atLeast(1)).get(anyInt());
         verify(mock, atLeastOnce()).get(anyInt());
         verify(mock, atMost(2)).get(anyInt());
         verify(mock, never()).get(2);
+    }
+
+    @Test
+    void argumentCapturing() {
+        mock.add("string");
+
+        // capteur d'argument pour un argument de type String
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(mock).add(argumentCaptor.capture()); // verify().add() vérifie la méthode add() du mock
+
+        assertEquals("string", argumentCaptor.getValue());
     }
 }
