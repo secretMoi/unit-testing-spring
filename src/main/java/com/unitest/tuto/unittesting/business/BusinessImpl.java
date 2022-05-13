@@ -1,15 +1,14 @@
 package com.unitest.tuto.unittesting.business;
 
 import com.unitest.tuto.unittesting.data.SomeDataService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@Setter
 public class BusinessImpl {
 
-    private final SomeDataService someDataService;
+    private SomeDataService someDataService;
 
     public int calculateSum(int[] data) {
         int sum = 0;

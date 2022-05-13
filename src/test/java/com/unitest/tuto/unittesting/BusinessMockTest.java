@@ -3,32 +3,33 @@ package com.unitest.tuto.unittesting;
 
 import com.unitest.tuto.unittesting.business.BusinessImpl;
 import com.unitest.tuto.unittesting.data.SomeDataService;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-//@Service
-//class SomeDataServiceStub implements SomeDataService {
-//
-//    @Override
-//    public int[] retrieveAllData() {
-//        return new int[] {1,2,3};
-//    }
-//}
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@Ignore
-public class BusinessStubTest {
+public class BusinessMockTest {
 
-    @Autowired
     private BusinessImpl business;
+
+    @BeforeEach
+    private void setTestEnvironment() {
+        business = new BusinessImpl();
+    }
 
     @Test
     public void calculateSum_basic() {
+
+        var dataServiceMock = mock(SomeDataService.class); // création du mock
+        when(dataServiceMock.retrieveAllData()).thenReturn(new int [] {1,2,3}); // mock les données
+        business.setSomeDataService(dataServiceMock);
+
         int actualResult = business.calculateSumUsingDataService();
         int expectedResult = 6;
 
@@ -37,6 +38,11 @@ public class BusinessStubTest {
 
     @Test
     public void calculateSum_emptyArray() {
+
+        var dataServiceMock = mock(SomeDataService.class); // création du mock
+        when(dataServiceMock.retrieveAllData()).thenReturn(new int [] {}); // mock les données
+        business.setSomeDataService(dataServiceMock);
+
         int actualResult = business.calculateSumUsingDataService();
         int expectedResult = 0;
 
@@ -45,6 +51,10 @@ public class BusinessStubTest {
 
     @Test
     public void calculateSum_oneValue() {
+        var dataServiceMock = mock(SomeDataService.class); // création du mock
+        when(dataServiceMock.retrieveAllData()).thenReturn(new int [] {5}); // mock les données
+        business.setSomeDataService(dataServiceMock);
+
         int actualResult = business.calculateSumUsingDataService();
         int expectedResult = 5;
 
