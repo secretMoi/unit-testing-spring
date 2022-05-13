@@ -78,4 +78,18 @@ class ListMockTest {
 
         assertEquals("string", argumentCaptor.getValue());
     }
+
+    @Test
+    void multipleArgumentsCapturing() {
+        mock.add("string");
+        mock.add("string2");
+
+        // capteur d'argument pour un argument de type String
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(mock, times(2)).add(argumentCaptor.capture()); // verify().add() vérifie la méthode add() du mock + times(2) car 2 appels à add()
+
+        List<String> allValues = argumentCaptor.getAllValues();
+        assertEquals("string", allValues.get(0));
+        assertEquals("string2", allValues.get(1));
+    }
 }
