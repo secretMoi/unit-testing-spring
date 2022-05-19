@@ -3,6 +3,7 @@ package com.unitest.tuto.unittesting;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,6 +14,7 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -91,5 +93,37 @@ class ListMockTest {
         List<String> allValues = argumentCaptor.getAllValues();
         assertEquals("string", allValues.get(0));
         assertEquals("string2", allValues.get(1));
+    }
+
+    @Test
+    public void mocking() {
+        var arrayListMock = mock(ArrayList.class);
+        System.out.println(arrayListMock.get(0)); // null
+        System.out.println(arrayListMock.size()); // 0
+        System.out.println(arrayListMock.add("Test")); // false
+        System.out.println(arrayListMock.add("Test2")); // false
+        System.out.println(arrayListMock.size()); // 0
+
+        when(arrayListMock.size()).thenReturn(5);
+        System.out.println(arrayListMock.size()); // 5
+    }
+
+    /*
+    Spy retient l'état de la liste par rapport au mock
+     */
+    @Test
+    public void spying() {
+        var arrayListSpy = spy(ArrayList.class);
+        System.out.println(arrayListSpy.add("Test0")); // true
+        System.out.println(arrayListSpy.get(0)); // Test0
+        System.out.println(arrayListSpy.size()); // 1
+        System.out.println(arrayListSpy.add("Test")); // true
+        System.out.println(arrayListSpy.add("Test2")); // true
+        System.out.println(arrayListSpy.size()); // 3
+
+        when(arrayListSpy.size()).thenReturn(5);
+        System.out.println(arrayListSpy.size()); // 5
+
+        verify(arrayListSpy).add("Test2");
     }
 }
