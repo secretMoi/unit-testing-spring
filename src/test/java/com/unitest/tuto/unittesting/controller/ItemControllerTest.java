@@ -1,6 +1,6 @@
-package com.unitest.tuto.unittesting;
+package com.unitest.tuto.unittesting.controller;
 
-import com.unitest.tuto.unittesting.controller.HelloWorldController;
+import com.unitest.tuto.unittesting.controller.ItemController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +11,27 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(HelloWorldController.class)
-class HelloWorldControllerTest {
+@WebMvcTest(ItemController.class)
+class ItemControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void helloWorld_basic() throws Exception {
+    void dummyItem_basic() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/hello-world")
+                .get("/dummy-item")
                 .accept(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc
                 .perform(requestBuilder)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello World"))
+                .andExpect(content().json("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}"))
                 .andReturn();
 
-        Assertions.assertEquals("Hello World", result.getResponse().getContentAsString());
+//        Assertions.assertEquals("Hello World", result.getResponse().getContentAsString());
     }
 }
