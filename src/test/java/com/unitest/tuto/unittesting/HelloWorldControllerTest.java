@@ -1,6 +1,7 @@
 package com.unitest.tuto.unittesting;
 
 import com.unitest.tuto.unittesting.controller.HelloWorldController;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,6 +12,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(HelloWorldController.class)
 class HelloWorldControllerTest {
@@ -24,8 +27,12 @@ class HelloWorldControllerTest {
                 .get("/hello-world")
                 .accept(MediaType.APPLICATION_JSON);
 
-        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        MvcResult result = mockMvc
+                .perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hello World"))
+                .andReturn();
 
-        assertEquals("Hello World", result.getResponse().getContentAsString());
+        Assertions.assertEquals("Hello World", result.getResponse().getContentAsString());
     }
 }
