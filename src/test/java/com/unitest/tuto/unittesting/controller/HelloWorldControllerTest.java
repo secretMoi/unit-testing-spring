@@ -1,6 +1,6 @@
-package com.unitest.tuto.unittesting;
+package com.unitest.tuto.unittesting.controller;
 
-import com.unitest.tuto.unittesting.controller.ItemController;
+import com.unitest.tuto.unittesting.controller.HelloWorldController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +11,20 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ItemController.class)
-class ItemControllerTest {
+@WebMvcTest(HelloWorldController.class)
+class HelloWorldControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void dummyItem_basic() throws Exception {
+    void helloWorld_basic() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/dummy-item")
+                .get("/hello-world")
                 .accept(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc
