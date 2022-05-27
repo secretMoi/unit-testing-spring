@@ -1,4 +1,4 @@
-package com.unitest.tuto.unittesting.service;
+package com.unitest.tuto.unittesting.item.service;
 
 import com.unitest.tuto.unittesting.business.ItemBusinessService;
 import com.unitest.tuto.unittesting.controller.ItemController;
