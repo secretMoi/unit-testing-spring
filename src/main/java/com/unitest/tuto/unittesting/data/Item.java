@@ -2,6 +2,7 @@ package com.unitest.tuto.unittesting.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.Transient;
 @AllArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
 public class Item {
 
     @Id
