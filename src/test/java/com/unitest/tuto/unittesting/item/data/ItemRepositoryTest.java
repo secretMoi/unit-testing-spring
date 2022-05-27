@@ -1,4 +1,4 @@
-package com.unitest.tuto.unittesting.data;
+package com.unitest.tuto.unittesting.item.data;
 
 import com.unitest.tuto.unittesting.repository.ItemRepository;
 import org.junit.jupiter.api.Test;

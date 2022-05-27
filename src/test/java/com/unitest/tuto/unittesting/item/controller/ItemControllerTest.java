@@ -1,6 +1,7 @@
-package com.unitest.tuto.unittesting.controller;
+package com.unitest.tuto.unittesting.item.controller;
 
 import com.unitest.tuto.unittesting.business.ItemBusinessService;
+import com.unitest.tuto.unittesting.controller.ItemController;
 import com.unitest.tuto.unittesting.data.Item;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

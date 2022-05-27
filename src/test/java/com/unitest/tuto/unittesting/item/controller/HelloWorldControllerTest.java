@@ -1,4 +1,4 @@
-package com.unitest.tuto.unittesting.controller;
+package com.unitest.tuto.unittesting.item.controller;
 
 import com.unitest.tuto.unittesting.controller.HelloWorldController;
 import org.junit.jupiter.api.Assertions;
