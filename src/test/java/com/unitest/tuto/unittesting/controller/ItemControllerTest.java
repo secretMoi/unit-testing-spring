@@ -1,9 +1,7 @@
 package com.unitest.tuto.unittesting.controller;
 
 import com.unitest.tuto.unittesting.business.ItemBusinessService;
-import com.unitest.tuto.unittesting.controller.ItemController;
 import com.unitest.tuto.unittesting.data.Item;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,8 +12,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
