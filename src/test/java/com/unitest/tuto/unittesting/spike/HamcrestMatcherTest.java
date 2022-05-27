@@ -4,15 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.everyItem;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.isEmptyString;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.Matchers.startsWith;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class HamcrestMatcherTest {
 
@@ -20,13 +12,27 @@ class HamcrestMatcherTest {
     void learning() {
         var numbers = Arrays.asList(12, 15, 45);
 
-        assertThat(numbers, hasSize(3));
-        assertThat(numbers, hasItems(12, 45));
-        assertThat(numbers, everyItem(greaterThan(10)));
-        assertThat(numbers, everyItem(lessThan(100)));
+//        assertThat(numbers, hasSize(3));
+        assertThat(numbers)
+                .hasSize(3)
+                .contains(12, 45)
+                .allMatch(x -> x > 10)
+                .allMatch(x -> x < 100)
+                .noneMatch(x -> x < 10);
 
-        assertThat("", isEmptyString());
-        assertThat("abcde", containsString("cd"));
-        assertThat("abcde", startsWith("ab"));
+        assertThat("").isEmpty();
+        assertThat("abcde")
+                .contains("cd")
+                .startsWith("ab")
+                .endsWith("de");
+
+
+//        assertThat(numbers, hasItems(12, 45));
+//        assertThat(numbers, everyItem(greaterThan(10)));
+//        assertThat(numbers, everyItem(lessThan(100)));
+//
+//        assertThat("", isEmptyString());
+//        assertThat("abcde", containsString("cd"));
+//        assertThat("abcde", startsWith("ab"));
     }
 }
